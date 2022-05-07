@@ -1,14 +1,18 @@
 import "./App.css";
 import Create from "./Components/Create/Create";
+import Read from "./Components/Read/Read";
 
 function App() {
   return (
     <div className="main">
       <div>
-        <h3>react crud Operations</h3>
+        <h3>React Crud Operations</h3>
       </div>
       <div>
         <Create />
+      </div>
+      <div>
+        <Read />
       </div>
     </div>
   );
