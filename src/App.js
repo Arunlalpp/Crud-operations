@@ -2,7 +2,6 @@ import "./App.css";
 import Create from "./Components/Create/Create";
 import Read from "./Components/Read/Read";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Erase from "./Components/Erase/Erase";
 import Update from "./Components/Update/Update";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
           <Route exact path="/Read" element={<Read />} />
 
           <Route path="/Update" element={<Update />} />
-          <Route path="/Erase"  element={<Erase />} />
         </Routes>
       </BrowserRouter>
     </div>

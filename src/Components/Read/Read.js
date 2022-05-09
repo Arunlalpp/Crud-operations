@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "semantic-ui-react";
 import axios from "axios";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Read() {
   const [apiData, setApiData] = useState([]);
@@ -11,12 +11,29 @@ function Read() {
       .then((getData) => {
         setApiData(getData.data);
       });
-  }, [])
+  }, []);
 
-  const setID = (id) => {
-    console.log(id)
-    localStorage.setItem('ID' , id)
-  }
+  const setData = (id, firstName, lastName) => {
+    localStorage.setItem("ID", id);
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("lastName", lastName);
+  };
+
+  const getData = () => {
+    axios
+      .get("https://6276c27b2f94a1d70606e859.mockapi.io/Crud")
+      .then((getData) => {
+        setApiData(getData.data);
+      });
+  };
+
+  const onDelete = (id) => {
+    axios
+      .delete(`https://6276c27b2f94a1d70606e859.mockapi.io/Crud/${id}`)
+      .then(() => {
+        getData();
+      });
+  };
   return (
     <div>
       <link
@@ -36,21 +53,27 @@ function Read() {
         </Table.Header>
         <Table.Body>
           {apiData.map((data) => {
-            console.log(apiData)
             return (
               <Table.Row>
                 <Table.Cell>{data.id}</Table.Cell>
                 <Table.Cell>{data.firstName}</Table.Cell>
                 <Table.Cell>{data.lastName}</Table.Cell>
                 <Table.Cell>
-                  <Link to= '/update'>
-                  <Button color="green" onClick={()=>setID(data.id)}>Update</Button>
+                  <Link to="/update">
+                    <Button
+                      color="green"
+                      onClick={() =>
+                        setData(data.id, data.firstName, data.lastName)
+                      }
+                    >
+                      Update
+                    </Button>
                   </Link>
                 </Table.Cell>
                 <Table.Cell>
-                  <Link to= '/delete'>
-                  <Button color="red">Delete</Button>
-                  </Link>
+                  <Button color="red" onClick={() => onDelete(data.id)}>
+                    Delete
+                  </Button>
                 </Table.Cell>
               </Table.Row>
             );

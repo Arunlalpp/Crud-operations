@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 function Create() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
   const sendDataToAPI = () => {
-    axios.post("https://6276c27b2f94a1d70606e859.mockapi.io/Crud", {
-      firstName,
-      lastName,
-    });
+    axios
+      .post("https://6276c27b2f94a1d70606e859.mockapi.io/Crud", {
+        firstName,
+        lastName,
+      })
+      .then(() => {
+        navigate("/Read");
+      });
   };
   return (
     <div>
@@ -36,7 +41,9 @@ function Create() {
             placeholder="Last Name"
           />
         </Form.Field>
-        <Button type="submit" onClick={sendDataToAPI}>Submit</Button>
+        <Button type="submit" onClick={sendDataToAPI}>
+          Submit
+        </Button>
       </Form>
     </div>
   );
