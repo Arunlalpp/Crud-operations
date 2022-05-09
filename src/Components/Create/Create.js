@@ -9,7 +9,7 @@ function Create() {
   console.log(lastName);
 
   const sendDataToAPI = () => {
-    axios.post("https://6275735215458100a6a38242.mockapi.io/Crud", {
+    axios.post("https://6275783915458100a6a3fb27.mockapi.io/Crud", {
       firstName,
       lastName,
     });

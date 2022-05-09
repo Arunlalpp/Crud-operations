@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
-import { Label, Table } from "semantic-ui-react";
+import React, { useEffect,useState } from "react";
+import { Table,Button } from "semantic-ui-react";
 import axios from "axios";
 
 function Read() {
+  const[apiData,setApiData] = useState([]);
   useEffect(() => {
     axios
-      .get("https://6275735215458100a6a38242.mockapi.io/Crud")
+      .get("https://6275783915458100a6a3fb27.mockapi.io/Crud")
       .then((getData) => {
-        console.log(getData);
+       setApiData(getData.data)
       });
   });
   return (
@@ -20,34 +21,34 @@ function Read() {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Header</Table.HeaderCell>
-            <Table.HeaderCell>Header</Table.HeaderCell>
-            <Table.HeaderCell>Header</Table.HeaderCell>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>first Name</Table.HeaderCell>
+            <Table.HeaderCell>Last Name</Table.HeaderCell>
+            <Table.HeaderCell>Update</Table.HeaderCell>
+            <Table.HeaderCell>Delete</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-
         <Table.Body>
+          {apiData.map((data) => {
+            return(
+              
           <Table.Row>
-            <Table.Cell>
-              <Label ribbon>First</Label>
-            </Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-          </Table.Row>
+          <Table.Cell>{data.id}</Table.Cell>
+          <Table.Cell>{data.firstName}</Table.Cell>
+          <Table.Cell>{data.lastName}</Table.Cell>
+          <Table.Cell>
+            <Button color="green">Update</Button>
+          </Table.Cell>
+          <Table.Cell>
+            <Button color="red">Delete</Button>
+          </Table.Cell>
+        </Table.Row>
+            )
+          })}
         </Table.Body>
       </Table>
     </div>
-  );
+  )
 }
 
 export default Read;
