@@ -5,11 +5,9 @@ import axios from "axios";
 function Create() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  console.log(firstName);
-  console.log(lastName);
 
   const sendDataToAPI = () => {
-    axios.post("https://6275783915458100a6a3fb27.mockapi.io/Crud", {
+    axios.post("https://6276c27b2f94a1d70606e859.mockapi.io/Crud", {
       firstName,
       lastName,
     });
@@ -38,7 +36,7 @@ function Create() {
             placeholder="Last Name"
           />
         </Form.Field>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" onClick={sendDataToAPI}>Submit</Button>
       </Form>
     </div>
   );
